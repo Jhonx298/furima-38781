@@ -5,7 +5,7 @@
 
 | Column             | Type    | Option                        |
 |--------------------|---------|-------------------------------|
-| email              | string  | null: false, uniqueness: true |
+| email              | string  | null: false, unique: true |
 | encrypted_password | string  | null: false                   |
 | nickname           | string  | null: false                   |
 | first_name         | string  | null: false                   |
@@ -28,7 +28,7 @@ has_many :purchase_records
 | product_description | text       | null: false                    |
 | category_id         | integer    | null: false                    |
 | condition_id        | integer    | null: false                    |
-| shipping_charges_id | integer    | null: false                    |
+| shipping_charge_id  | integer    | null: false                    |
 | prefecture_id       | integer    | null: false                    |
 | days_ship_id        | integer    | null: false                    |
 | price               | integer    | null: false                    |
@@ -58,8 +58,8 @@ has_one    :shipping_info
 
 | Column          | Type       | Option                            |
 |-----------------|------------|-----------------------------------|
-| post_code       | integer    | null: false                       |
-| prefecture_id   | string     | null: false                       |
+| post_code       | string     | null: false                       |
+| prefecture_id   | integer    | null: false                       |
 | city            | string     | null: false                       |
 | address_num     | string     | null: false                       |
 | buiding_name    | string     |                                   |
