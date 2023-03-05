@@ -1,24 +1,71 @@
-# README
+# テーブル設計
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
 
-Things you may want to cover:
+## usersテーブル
 
-* Ruby version
+| Column             | Type    | Option                        |
+|--------------------|---------|-------------------------------|
+| email              | string  | null: false, unique: true     |
+| encrypted_password | string  | null: false                   |
+| nickname           | string  | null: false                   |
+| first_name         | string  | null: false                   |
+| last_name          | string  | null: false                   |
+| kana_first_name    | string  | null: false                   |
+| kana_last_name     | string  | null: false                   |
+| birthday           | date    | null: false                   |
 
-* System dependencies
+### Association
+has_many :products
+has_many :purchase_records
 
-* Configuration
 
-* Database creation
 
-* Database initialization
+## productsテーブル
 
-* How to run the test suite
+| Column              | Type       | Option                         |
+|-------------------- |------------|--------------------------------|
+| name                | string     | null: false                    |
+| product_description | text       | null: false                    |
+| category_id         | integer    | null: false                    |
+| condition_id        | integer    | null: false                    |
+| shipping_charge_id  | integer    | null: false                    |
+| prefecture_id       | integer    | null: false                    |
+| days_ship_id        | integer    | null: false                    |
+| price               | integer    | null: false                    |
+| user                | references | null: false, foreign_key: true |
 
-* Services (job queues, cache servers, search engines, etc.)
+### Association
+belongs_to :user
+has_one    :purchase_record
 
-* Deployment instructions
 
-* ...
+
+## purchase_recordsテーブル
+
+| Column        | Type       | Option                         |
+|---------------|------------|--------------------------------|
+| user          | references | null: false, foreign_key: true |
+| product       | references | null: false, foreign_key: true |
+
+### Association
+belongs_to :user
+belongs_to :product
+has_one    :shipping_info
+
+
+
+## shipping_infosテーブル
+
+| Column          | Type       | Option                            |
+|-----------------|------------|-----------------------------------|
+| post_code       | string     | null: false                       |
+| prefecture_id   | integer    | null: false                       |
+| city            | string     | null: false                       |
+| address_num     | string     | null: false                       |
+| buiding_name    | string     |                                   |
+| phone_num       | string     | null: false                       |
+| purchase_record | references | null: false, foreign_key: true    |
+
+### Association
+belongs_to :purchase_record
+
