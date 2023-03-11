@@ -66,10 +66,22 @@ RSpec.describe User, type: :model do
         expect(@user.errors.full_messages).to include("Password is too long (maximum is 128 characters)")
       end
       it "passwordとpassword_confirmationが不一致では登録できない" do
-        @user.password = "123456"
-        @user.password_confirmation = "123457"
+        @user.password = "sample6"
+        @user.password_confirmation = "sample7"
         @user.valid?
         expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
+      end
+      it 'パスワードは半角英字のみでは保存できない' do
+        @user.password = "sample"
+        @user.password_confirmation = "sample"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password is invalid")
+      end
+      it 'パスワードは数字のみでは保存できない' do
+        @user.password = "123456"
+        @user.password_confirmation = "123456"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password is invalid")
       end
       it "重複したemailが存在する場合登録できない" do
         @user.save
@@ -91,6 +103,16 @@ RSpec.describe User, type: :model do
         @user.kana_last_name = "さんぷる"
         @user.valid?
         expect(@user.errors.full_messages).to include("Kana last name is invalid")
+      end
+      it "名前は半角英字では保存できない" do
+        @user.last_name = "sample"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Last name is invalid")
+      end
+      it '名字は半角英字では保存できない' do
+        @user.first_name = "sample"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("First name is invalid")
       end
     end
   end
