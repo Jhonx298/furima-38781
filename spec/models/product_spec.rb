@@ -93,6 +93,27 @@ RSpec.describe Product, type: :model do
         @product.valid?
         expect(@product.errors.full_messages).to include("Product description is too long (maximum is 1000 characters)")
       end
+      it "priceが半角数字以外では登録できない" do
+        @product.price= /\A[０-９]+\z/
+        @product.valid?
+        expect(@product.errors.full_messages).to include("Price is not a number")
+      end
+      it "priceが299円以下では登録できない" do
+        @product.price= rand(1..299)
+        @product.valid?
+        expect(@product.errors.full_messages).to include("Price must be greater than or equal to 300")
+      end
+      it "priceが10,000,000では登録できない" do
+        @product.price= 10_000_000
+        @product.valid?
+        expect(@product.errors.full_messages).to include("Price must be less than or equal to 9999999")
+      end
+      it "ユーザーが紐付いていないと出品できない" do
+        @product.user = nil
+        @product.valid?
+        expect(@product.errors.full_messages).to include "User must exist"
+      end
+      
     end
   end
 end
