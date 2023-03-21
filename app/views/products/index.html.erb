@@ -133,11 +133,11 @@
         <div class='item-img-content'>
           <%= image_tag product.image, class: "item-img" %>
 
-          <% if product.purchase_record.present? %>
+          <%# <% if product.purchase_record.present? %>
           <div class='sold-out'>
             <span>Sold Out!!</span>
           </div>
-          <% end %>
+          <%# <% end %>
 
         </div>
         <div class='item-info'>
@@ -177,7 +177,7 @@
       <% end %>
     </ul>
   </div>
-  
+
   <%# /商品一覧 %>
 </div>
 <%= link_to( new_product_path, class: 'purchase-btn') do %>
