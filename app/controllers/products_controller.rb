@@ -1,5 +1,6 @@
 class ProductsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
+  before_action :correct_user, only: [:edit, :update]
 
   def index
     @products = Product.order('created_at DESC')
@@ -41,4 +42,9 @@ class ProductsController < ApplicationController
       :condition_id, :shipping_charge_id, :prefecture_id, :days_ship_id).merge(user_id: current_user.id)
   end
 
+  def correct_user
+    @product = Product.find(params[:id])
+    @user = @product.user
+    redirect_to root_path unless @user == current_user
+  end
 end
