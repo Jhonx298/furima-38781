@@ -45,8 +45,6 @@ class ProductsController < ApplicationController
   end
 
   def correct_user
-    @product = Product.find(params[:id])
-    @user = @product.user
-    redirect_to root_path unless @user == current_user
+    redirect_to root_path unless @product.user == current_user
   end
 end
