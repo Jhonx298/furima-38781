@@ -50,13 +50,11 @@ RSpec.describe PurchaseForm, type: :model do
       it 'phone_numが11文字以上だと保存できないこと' do
         @purchase.phone_num = "1" * 12
         @purchase.valid?
-        binding.pry
         expect(@purchase.errors.full_messages).to include("Phone num is too long (maximum is 11 characters)")
       end
       it 'phone_numが10文字以下だと保存できないこと' do
         @purchase.phone_num = 9
         @purchase.valid?
-        binding.pry
         expect(@purchase.errors.full_messages).to include("Phone num is too short (minimum is 10 characters)")
       end
       it "tokenが空では登録できないこと" do
