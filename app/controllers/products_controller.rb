@@ -58,9 +58,8 @@ class ProductsController < ApplicationController
   end
 
   def sold_out
-    @product = Product.find(params[:product_id])
-    if @product.id == @product.purchase_record.product_id
-    redirect_to root_path
+    if @product.purchase_record.present?
+      redirect_to root_path
     end
   end
 end
