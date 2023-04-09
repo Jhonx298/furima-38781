@@ -7,13 +7,12 @@ class PurchaseForm
     validates :prefecture_id, numericality: { other_than: 1, message: "can`t be blank" }
     validates :city
     validates :address_num
-    validates :phone_num, numericality: {with: /\A\d{10,11}\z/}
+    validates :phone_num, length: { minimum: 10, maximum: 11 }
     validates :token
     validates :user_id
     validates :product_id
   end
-
-  validates :building_name, exclusion: { in: [nil] }
+    validates :building_name, exclusion: { in: [nil] }
 
   def save
     purchase_record = PurchaseRecord.create(user_id: user_id, product_id: product_id)
