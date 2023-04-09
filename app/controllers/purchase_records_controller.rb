@@ -1,15 +1,14 @@
 class PurchaseRecordsController < ApplicationController
   before_action :authenticate_user!
-  before_action :sold_out, only: :index
+  before_action :sold_out, only: [:index, :create]
   before_action :user_product, only: :index
+  before_action :set_purchase, only: :index
 
   def index
-    @product = Product.find(params[:product_id])
     @purchase_form = PurchaseForm.new
   end
 
   def create
-    @product = Product.find(params[:product_id])
     @purchase_form = PurchaseForm.new(purchase_record_params)
     if @purchase_form.valid?
       pay_item
@@ -48,4 +47,7 @@ class PurchaseRecordsController < ApplicationController
     end
   end
 
+  def set_purchase
+  @product = Product.find(params[:product_id])
+  end
 end

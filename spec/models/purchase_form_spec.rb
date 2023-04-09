@@ -57,6 +57,11 @@ RSpec.describe PurchaseForm, type: :model do
         @purchase.valid?
         expect(@purchase.errors.full_messages).to include("Phone num is too short (minimum is 10 characters)")
       end
+      it 'phone_numに半角数字以外が含まれている場合は保存できない' do
+        @purchase.phone_num = "９"
+        @purchase.valid?
+        expect(@purchase.errors.full_messages).to include("Phone num is not a number")
+      end
       it "tokenが空では登録できないこと" do
         @purchase.token = nil
         @purchase.valid?
