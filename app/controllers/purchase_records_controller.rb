@@ -1,8 +1,8 @@
 class PurchaseRecordsController < ApplicationController
+  before_action :set_purchase, exept: :create
   before_action :authenticate_user!
   before_action :sold_out, only: [:index, :create]
   before_action :user_product, only: :index
-  before_action :set_purchase, only: :index
 
   def index
     @purchase_form = PurchaseForm.new
@@ -34,14 +34,12 @@ class PurchaseRecordsController < ApplicationController
   end
 
   def sold_out
-    @product = Product.find(params[:product_id])
     if @product.purchase_record.present?
       redirect_to root_path
     end
   end
 
   def user_product
-    @product = Product.find(params[:product_id])
     if @product.user_id == current_user.id
       redirect_to root_path
     end
