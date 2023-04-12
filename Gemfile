@@ -45,6 +45,7 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'rubocop', require: false
+  gem 'unicorn', '5.4.1'
 end
 
 group :test do
@@ -68,3 +69,4 @@ gem 'active_hash'
 gem 'mini_magick'
 gem 'image_processing', '~> 1.2'
 gem 'payjp'
+gem "aws-sdk-s3", require: false
