@@ -3,7 +3,7 @@ FactoryBot.define do
     name                {Faker::Name.last_name}
     product_description {Faker::Lorem.sentence}
     price               {rand(300..9999999)}
-    category_id         {rand(2..10)}
+    category_id         {rand(2..11)}
     condition_id        {rand(2..7)}
     shipping_charge_id  {rand(2..3)}
     prefecture_id       {rand(2..48)}
