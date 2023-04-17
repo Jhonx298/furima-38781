@@ -45,7 +45,6 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'rubocop', require: false
-  gem 'unicorn', '5.4.1'
 end
 
 group :test do
@@ -60,7 +59,7 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 group :production do
-  gem 'pg'
+  gem 'unicorn', '5.4.1'
 end
 
 gem 'devise'
